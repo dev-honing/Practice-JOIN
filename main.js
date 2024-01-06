@@ -31,7 +31,7 @@ connection.connect((error) => {
         //* Galaxy Tab 사용자
         const createGalaxyTabTable = `
           CREATE TABLE galaxy_tab_owners (
-            user_id INT PRIMARY KEY,
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
             user_name VARCHAR(255),
             galaxy_tab_model VARCHAR(255)
           );
@@ -40,7 +40,7 @@ connection.connect((error) => {
         //* Ipad 사용자
         const createIpadTable = `
           CREATE TABLE Ipad_owners (
-            user_id INT PRIMARY KEY,
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
             user_name VARCHAR(255),
             Ipad_model VARCHAR(255)
           );
@@ -60,8 +60,25 @@ connection.connect((error) => {
             } else {
               console.log('Ipad 테이블 생성 성공');
 
-              // 연결 종료
-              connection.end();
+              // Galaxy Tab 테이블에 더미 데이터 추가
+              const insertGalaxyTabDataQuery = `
+                INSERT INTO galaxy_tab_owners (user_name, galaxy_tab_model)
+                VALUES
+                  ('John Doe', 'Galaxy Tab S7'),
+                  ('Jane Doe', 'Galaxy Tab S6'),
+                  ('Bob Smith', 'Galaxy Tab S7');
+              `;
+
+              connection.query(insertGalaxyTabDataQuery, (insertGalaxyTabError) => {
+                if (insertGalaxyTabError) {
+                  console.error('Galaxy Tab 더미 데이터 삽입 오류: ', insertGalaxyTabError.message);
+                } else {
+                  console.log('Galaxy Tab 더미 데이터 삽입 성공');
+
+                  // 연결 종료
+                  connection.end();
+                }
+              });
             }
           });
         });
