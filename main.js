@@ -21,7 +21,7 @@ connection.connect((error) => {
   } else {
     console.log('DB 연결 성공');
   }
-  
+
   connection.query(createDatabaseQuery, (dbError) => {
     if (dbError) {
       console.error('DB 생성 오류: ', dbError.message);
@@ -31,4 +31,21 @@ connection.connect((error) => {
   })
 })
 
-// TABLE 생성
+// TABLE을 생성하는 쿼리문
+//* Galaxy Tab 사용자
+const createGalaxyTabTable = `
+  CREATE TABLE galaxy_tab_owners (
+  user_id INT PRIMARY KEY,
+  user_name VARCHAR(255),
+  galaxy_tab_model VARCHAR(255)
+);
+`;
+
+//* Ipad 사용자
+const createIpadTable = `
+  CREATE TABLE Ipad_owners (
+    user_id INT PRIMARY KEY,
+    user_name VARCHAR(255),
+    Ipad_model VARCHAR(255)
+  );
+`;
