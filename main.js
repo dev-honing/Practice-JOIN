@@ -31,7 +31,7 @@ connection.connect((error) => {
         //* Galaxy Tab 사용자
         const createGalaxyTabTable = `
           CREATE TABLE galaxy_tab_owners (
-            user_id INT AUTO_INCREMENT PRIMARY KEY,
+            user_number INT AUTO_INCREMENT PRIMARY KEY,
             user_name VARCHAR(255),
             galaxy_tab_model VARCHAR(255)
           );
@@ -40,7 +40,7 @@ connection.connect((error) => {
         //* Ipad 사용자
         const createIpadTable = `
           CREATE TABLE Ipad_owners (
-            user_id INT AUTO_INCREMENT PRIMARY KEY,
+            user_number INT AUTO_INCREMENT PRIMARY KEY,
             user_name VARCHAR(255),
             Ipad_model VARCHAR(255)
           );
