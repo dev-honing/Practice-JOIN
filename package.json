@@ -1,0 +1,15 @@
+{
+  "name": "practice-join",
+  "version": "1.0.0",
+  "description": "ERP 프로젝트에 반영할 SQL-JOIN문 연습을 위한 Repository",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^3.6.5"
+  }
+}
