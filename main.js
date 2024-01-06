@@ -75,8 +75,25 @@ connection.connect((error) => {
                 } else {
                   console.log('Galaxy Tab 더미 데이터 삽입 성공');
 
-                  // 연결 종료
-                  connection.end();
+                  // Ipad 테이블에 더미 데이터 추가
+                  const insertIpadDataQuery = `
+                    INSERT INTO Ipad_owners (user_name, Ipad_model)
+                    VALUES
+                      ('Alice Johnson', 'iPad Pro 12.9'),
+                      ('Charlie Brown', 'iPad Air 4'),
+                      ('Eva Martinez', 'iPad Mini 6');
+                  `;
+
+                  connection.query(insertIpadDataQuery, (insertIpadError) => {
+                    if (insertIpadError) {
+                      console.error('Ipad 더미 데이터 삽입 오류: ', insertIpadError.message);
+                    } else {
+                      console.log('Ipad 더미 데이터 삽입 성공');
+
+                      // 연결 종료
+                      connection.end();
+                    }
+                  });
                 }
               });
             }
