@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 // TEST DB를 생성하는 쿼리문
 const createDatabaseQuery = `
   CREATE DATABASE IF NOT EXISTS TEST
-  `;
+`;
 
 // MariaDB에 연결하면 TEST DB를 생성
 connection.connect((error) => {
@@ -19,32 +19,52 @@ connection.connect((error) => {
     console.error("DB 연결 오류: ", error.message);
   } else {
     console.log("DB 연결 성공");
+
+    connection.query(createDatabaseQuery, (dbError) => {
+      if (dbError) {
+        console.error("DB 생성 오류: ", dbError.message);
+      } else {
+        console.log("DB 생성 성공 또는 이미 존재함");
+
+        // TABLE을 생성하는 쿼리문
+        //* Galaxy Tab 사용자
+        const createGalaxyTabTable = `
+          CREATE TABLE galaxy_tab_owners (
+            user_id INT PRIMARY KEY,
+            user_name VARCHAR(255),
+            galaxy_tab_model VARCHAR(255)
+          );
+        `;
+
+        //* Ipad 사용자
+        const createIpadTable = `
+          CREATE TABLE Ipad_owners (
+            user_id INT PRIMARY KEY,
+            user_name VARCHAR(255),
+            Ipad_model VARCHAR(255)
+          );
+        `;
+
+        // TABLE을 생성
+        connection.query(createGalaxyTabTable, (galaxyTabError) => {
+          if (galaxyTabError) {
+            console.error('Galaxy Tab 테이블 생성 오류: ', galaxyTabError.message);
+          } else {
+            console.log('Galaxy Tab 테이블 생성 성공');
+          }
+
+          connection.query(createIpadTable, (iPadError) => {
+            if (iPadError) {
+              console.error('Ipad 테이블 생성 오류: ', iPadError.message);
+            } else {
+              console.log('Ipad 테이블 생성 성공');
+
+              // 연결 종료
+              connection.end();
+            }
+          });
+        });
+      }
+    });
   }
-
-  connection.query(createDatabaseQuery, (dbError) => {
-    if (dbError) {
-      console.error("DB 생성 오류: ", dbError.message);
-    } else {
-      console.log("DB 생성 성공 또는 이미 존재함");
-    }
-  });
 });
-
-// TABLE을 생성하는 쿼리문
-//* Galaxy Tab 사용자
-const createGalaxyTabTable = `
-  CREATE TABLE galaxy_tab_owners (
-    user_id INT PRIMARY KEY,
-    user_name VARCHAR(255),
-    galaxy_tab_model VARCHAR(255)
-  );
-`;
-
-//* Ipad 사용자
-const createIpadTable = `
-  CREATE TABLE Ipad_owners (
-    user_id INT PRIMARY KEY,
-    user_name VARCHAR(255),
-    Ipad_model VARCHAR(255)
-  );
-`;
