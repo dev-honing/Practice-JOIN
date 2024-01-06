@@ -32,7 +32,7 @@ connection.connect((error) => {
         const createGalaxyTabTable = `
           CREATE TABLE IF NOT EXISTS galaxy_tab_owners (
             user_number INT AUTO_INCREMENT PRIMARY KEY,
-            user_name VARCHAR(255),
+            user_name VARCHAR(255) UNIQUE,
             galaxy_tab_model VARCHAR(255)
           );
         `;
@@ -41,7 +41,7 @@ connection.connect((error) => {
         const createIpadTable = `
           CREATE TABLE IF NOT EXISTS Ipad_owners (
             user_number INT AUTO_INCREMENT PRIMARY KEY,
-            user_name VARCHAR(255),
+            user_name VARCHAR(255) UNIQUE,
             Ipad_model VARCHAR(255)
           );
         `;
@@ -66,7 +66,8 @@ connection.connect((error) => {
                 VALUES
                   ('John Doe', 'Galaxy Tab S7'),
                   ('Jane Doe', 'Galaxy Tab S6'),
-                  ('Bob Smith', 'Galaxy Tab S7');
+                  ('Bob Smith', 'Galaxy Tab S7')
+                ON DUPLICATE KEY UPDATE user_name = user_name;
               `;
 
               connection.query(insertGalaxyTabDataQuery, (insertGalaxyTabError) => {
@@ -81,7 +82,8 @@ connection.connect((error) => {
                     VALUES
                       ('Alice Johnson', 'iPad Pro 12.9'),
                       ('Charlie Brown', 'iPad Air 4'),
-                      ('Eva Martinez', 'iPad Mini 6');
+                      ('Eva Martinez', 'iPad Mini 6')
+                    ON DUPLICATE KEY UPDATE user_name = user_name;
                   `;
 
                   connection.query(insertIpadDataQuery, (insertIpadError) => {
