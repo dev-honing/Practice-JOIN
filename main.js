@@ -9,18 +9,19 @@ const connection = mysql.createConnection({
 });
 
 
-// JOIN DB를 생성하는 쿼리문
+// TEST DB를 생성하는 쿼리문
 const createDatabaseQuery = `
-  CREATE DATABASE IF NOT EXISTS JOIN
+  CREATE DATABASE IF NOT EXISTS TEST
   `;
 
-// MariaDB에 연결하면 JOIN DB를 생성 
+// MariaDB에 연결하면 TEST DB를 생성 
 connection.connect((error) => {
   if (error) {
     console.error('DB 연결 오류: ', error.message);
   } else {
     console.log('DB 연결 성공');
   }
+  
   connection.query(createDatabaseQuery, (dbError) => {
     if (dbError) {
       console.error('DB 생성 오류: ', dbError.message);
