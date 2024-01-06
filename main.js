@@ -2,10 +2,10 @@
 const mysql = require('mysql2');
 
 // MariaDB 연결 설정
-
-
-// DB 생성
-
-
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '1234',
+});
 
 // TABLE 생성
