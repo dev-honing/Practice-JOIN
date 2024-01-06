@@ -30,7 +30,7 @@ connection.connect((error) => {
         // TABLE을 생성하는 쿼리문
         //* Galaxy Tab 사용자
         const createGalaxyTabTable = `
-          CREATE TABLE galaxy_tab_owners (
+          CREATE TABLE IF NOT EXISTS galaxy_tab_owners (
             user_number INT AUTO_INCREMENT PRIMARY KEY,
             user_name VARCHAR(255),
             galaxy_tab_model VARCHAR(255)
@@ -39,7 +39,7 @@ connection.connect((error) => {
 
         //* Ipad 사용자
         const createIpadTable = `
-          CREATE TABLE Ipad_owners (
+          CREATE TABLE IF NOT EXISTS Ipad_owners (
             user_number INT AUTO_INCREMENT PRIMARY KEY,
             user_name VARCHAR(255),
             Ipad_model VARCHAR(255)
@@ -51,14 +51,14 @@ connection.connect((error) => {
           if (galaxyTabError) {
             console.error('Galaxy Tab 테이블 생성 오류: ', galaxyTabError.message);
           } else {
-            console.log('Galaxy Tab 테이블 생성 성공');
+            console.log('Galaxy Tab 테이블 생성 성공 또는 이미 존재함');
           }
 
           connection.query(createIpadTable, (iPadError) => {
             if (iPadError) {
               console.error('Ipad 테이블 생성 오류: ', iPadError.message);
             } else {
-              console.log('Ipad 테이블 생성 성공');
+              console.log('Ipad 테이블 생성 성공 또는 이미 존재함');
 
               // Galaxy Tab 테이블에 더미 데이터 추가
               const insertGalaxyTabDataQuery = `
