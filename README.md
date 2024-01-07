@@ -109,3 +109,30 @@ ON **A.id = B.id** AND **A.name = B.name**;
 
 ```
 
+## FULL JOIN
+
+두 테이블의 모든 레코드를 보여주고, 조건에 맞는 레코드를 붙여줌. 조건에 맞지 않으면 NULL 값을 붙여줌. 합집합과 같은 개념
+
+### 예제 코드:
+
+두 테이블의 모든 레코드를 보여주고, 조건에 맞는 레코드를 붙여줌. 조건에 맞지 않으면 NULL 값을 붙여줌.
+
+```sql
+SELECT A.id, A.name, A.score, B.grade
+FROM A
+**FULL JOIN** B
+ON **A.id = B.id** AND **A.name = B.name**;
+```
+
+### 결과:
+
+```sql
++----+------+-------+-------+
+| id | name | score | grade |
++----+------+-------+-------+
+|  1 | Kim  |    90 |     A |
+|  2 | Lee  |    80 |     B |
+|  3 | Park |    70 |  NULL |
+|  4 | Choi |  NULL |     C |
++----+------+-------+-------+
+```
